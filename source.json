@@ -1,0 +1,4 @@
+{
+  "upstream": "actions/create-github-app-token",
+  "version": "v3.0.0"
+}
