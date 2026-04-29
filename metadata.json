@@ -1,5 +1,6 @@
 {
   "owner": "actions",
   "name": "create-github-app-token",
-  "visibility": ""
+  "visibility": "internal",
+  "description": "GitHub Action for creating a GitHub App Installation Access Token"
 }

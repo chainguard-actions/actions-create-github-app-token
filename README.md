@@ -1,5 +1,7 @@
 # actions/create-github-app-token
 
+GitHub Action for creating a GitHub App Installation Access Token
+
 Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at [https://github.com/actions/create-github-app-token](https://github.com/actions/create-github-app-token).
 
 ## Versions
