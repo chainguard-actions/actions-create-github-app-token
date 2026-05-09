@@ -1,4 +1,6 @@
 {
-  "upstream": "actions/create-github-app-token",
-  "version": "v3.0.0"
+  "owner": "actions",
+  "repo": "create-github-app-token",
+  "version": "",
+  "url": "https://github.com/actions/create-github-app-token"
 }
