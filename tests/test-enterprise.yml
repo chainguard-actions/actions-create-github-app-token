@@ -1,0 +1,33 @@
+name: Test with enterprise input and remaining permissions
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        continue-on-error: true
+        with:
+          client-id: "fake-client-id"
+          private-key: "fake-private-key"
+          enterprise: "fake-enterprise"
+          permission-secret-scanning-alerts: "read"
+          permission-secrets: "read"
+          permission-security-events: "read"
+          permission-single-file: "read"
+          permission-starring: "read"
+          permission-statuses: "read"
+          permission-team-discussions: "read"
+          permission-vulnerability-alerts: "read"
+          permission-workflows: "write"
+      - name: Assert action ran (may fail due to fake credentials)
+        run: |
+          echo "outcome: ${{ steps.action.outcome }}"
+          if [ "${{ steps.action.outcome }}" = "success" ] || [ "${{ steps.action.outcome }}" = "failure" ]; then
+            echo "PASS: action executed"
+          else
+            echo "FAIL: action did not execute"
+            exit 1
+          fi

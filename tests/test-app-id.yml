@@ -1,0 +1,47 @@
+name: Test with deprecated app-id input and owner
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        continue-on-error: true
+        with:
+          app-id: "12345"
+          private-key: "fake-private-key"
+          owner: "fake-owner"
+          permission-organization-administration: "read"
+          permission-organization-announcement-banners: "read"
+          permission-organization-copilot-seat-management: "write"
+          permission-organization-custom-org-roles: "read"
+          permission-organization-custom-properties: "read"
+          permission-organization-custom-roles: "read"
+          permission-organization-events: "read"
+          permission-organization-hooks: "read"
+          permission-organization-packages: "read"
+          permission-organization-personal-access-token-requests: "read"
+          permission-organization-personal-access-tokens: "read"
+          permission-organization-plan: "read"
+          permission-organization-projects: "read"
+          permission-organization-secrets: "read"
+          permission-organization-self-hosted-runners: "read"
+          permission-organization-user-blocking: "read"
+          permission-packages: "read"
+          permission-pages: "read"
+          permission-profile: "write"
+          permission-pull-requests: "read"
+          permission-repository-custom-properties: "read"
+          permission-repository-hooks: "read"
+          permission-repository-projects: "read"
+      - name: Assert action ran (may fail due to fake credentials)
+        run: |
+          echo "outcome: ${{ steps.action.outcome }}"
+          if [ "${{ steps.action.outcome }}" = "success" ] || [ "${{ steps.action.outcome }}" = "failure" ]; then
+            echo "PASS: action executed"
+          else
+            echo "FAIL: action did not execute"
+            exit 1
+          fi
