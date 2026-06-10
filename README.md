@@ -9,6 +9,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 | Version | Tag | Upstream commit |
 |---------|-----|-----------------|
 | v3.0.0 | [`v3.0.0`](https://github.com/chainguard-actions/actions-create-github-app-token/tree/v3.0.0) | — |
+| v3.2.0 | [`v3.2.0`](https://github.com/chainguard-actions/actions-create-github-app-token/tree/v3.2.0) | [`bcd2ba4`](https://github.com/actions/create-github-app-token/commit/bcd2ba49218906704ab6c1aa796996da409d3eb1) |
 
 ## Privacy
 
