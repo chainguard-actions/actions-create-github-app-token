@@ -1,0 +1,52 @@
+name: Test with user-level permissions and deprecated skip_token_revoke
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Run action with user-level permissions (expect failure with invalid credentials)
+        id: action
+        uses: .
+        with:
+          app-id: "99999"
+          private-key: |
+            -----BEGIN RSA PRIVATE KEY-----
+            MIIEowIBAAKCAQEA2a2rwplBQLzHPZe5TNJT5sGMdB7GBqFGBOBiHDCMDQSzFfMr
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            -----END RSA PRIVATE KEY-----
+          skip_token_revoke: "true"
+          permission-email-addresses: read
+          permission-followers: read
+          permission-git-ssh-keys: read
+          permission-gpg-keys: read
+          permission-interaction-limits: read
+          permission-profile: write
+          permission-starring: read
+          permission-team-discussions: read
+        continue-on-error: true
+
+      - name: Assert action failed due to invalid credentials
+        run: |
+          echo "outcome: ${{ steps.action.outcome }}"
+          if [ "${{ steps.action.outcome }}" != "failure" ]; then
+            echo "FAIL: expected action to fail with invalid credentials"
+            exit 1
+          fi
+          echo "PASS: action correctly failed when given invalid credentials with user-level permissions"

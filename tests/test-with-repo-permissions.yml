@@ -1,0 +1,65 @@
+name: Test with repository-level permissions
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Run action with repository-level permissions (expect failure with invalid credentials)
+        id: action
+        uses: .
+        with:
+          app-id: "99999"
+          private-key: |
+            -----BEGIN RSA PRIVATE KEY-----
+            MIIEowIBAAKCAQEA2a2rwplBQLzHPZe5TNJT5sGMdB7GBqFGBOBiHDCMDQSzFfMr
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            FAKE0000000000000000000000000000000000000000000000000000000000000
+            -----END RSA PRIVATE KEY-----
+          permission-actions: read
+          permission-administration: read
+          permission-checks: read
+          permission-codespaces: read
+          permission-dependabot-secrets: read
+          permission-deployments: read
+          permission-environments: read
+          permission-issues: read
+          permission-metadata: read
+          permission-packages: read
+          permission-pages: read
+          permission-pull-requests: read
+          permission-repository-custom-properties: read
+          permission-repository-hooks: read
+          permission-repository-projects: read
+          permission-secret-scanning-alerts: read
+          permission-secrets: read
+          permission-security-events: read
+          permission-single-file: read
+          permission-statuses: read
+          permission-vulnerability-alerts: read
+          permission-workflows: write
+        continue-on-error: true
+
+      - name: Assert action failed due to invalid credentials
+        run: |
+          echo "outcome: ${{ steps.action.outcome }}"
+          if [ "${{ steps.action.outcome }}" != "failure" ]; then
+            echo "FAIL: expected action to fail with invalid credentials"
+            exit 1
+          fi
+          echo "PASS: action correctly failed when given invalid credentials with repo-level permissions"
