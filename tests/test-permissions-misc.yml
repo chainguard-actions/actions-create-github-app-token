@@ -1,4 +1,4 @@
-name: Test permissions - repository inputs part 2
+name: Test permissions - miscellaneous inputs
 on:
   workflow_dispatch:
 jobs:
@@ -12,18 +12,20 @@ jobs:
         with:
           client-id: "fake-client-id"
           private-key: "fake-private-key"
-          permission-enterprise-custom-properties-for-organizations: "read"
-          permission-environments: "read"
-          permission-followers: "read"
-          permission-git-ssh-keys: "read"
-          permission-gpg-keys: "read"
-          permission-interaction-limits: "read"
-          permission-issues: "read"
-          permission-members: "read"
-          permission-merge-queues: "read"
-          permission-metadata: "read"
-          permission-packages: "read"
-          permission-pages: "read"
+          permission-profile: "write"
+          permission-pull-requests: "read"
+          permission-repository-custom-properties: "read"
+          permission-repository-hooks: "read"
+          permission-repository-projects: "read"
+          permission-secret-scanning-alerts: "read"
+          permission-secrets: "read"
+          permission-security-events: "read"
+          permission-single-file: "read"
+          permission-starring: "read"
+          permission-statuses: "read"
+          permission-team-discussions: "read"
+          permission-vulnerability-alerts: "read"
+          permission-workflows: "write"
       - name: Assert action ran (failed gracefully with fake credentials)
         env:
           OUTCOME: ${{ steps.action.outcome }}
