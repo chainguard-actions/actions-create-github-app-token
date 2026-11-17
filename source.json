@@ -1,6 +1,16 @@
 {
   "owner": "actions",
   "repo": "create-github-app-token",
-  "version": "",
-  "url": "https://github.com/actions/create-github-app-token"
+  "version": "v3.4.0-beta",
+  "commit_sha": "305e4aec4e2000ce216527e282f0749f47637923",
+  "url": "https://github.com/actions/create-github-app-token",
+  "policy_sha": "374911c4be584df24e6da57af2d990570ef0f859",
+  "test_policy_sha": "843adf9e4b8f85d0c08b27b9d0b09dd094b54702",
+  "test_agent_version": "2",
+  "harden_agent_version": "2",
+  "dist_artifact": {
+    "gcs_uri": "gs://patch-actions-node-artifacts/dist-artifacts/actions/create-github-app-token/v3.4.0-beta/sha256-5ecaa133cd7ac6576dbc7fb3dbd7d5c37bf1e66c7e32eb6beee67f1e7434775b.tar.gz",
+    "sha256": "5ecaa133cd7ac6576dbc7fb3dbd7d5c37bf1e66c7e32eb6beee67f1e7434775b",
+    "size_bytes": 417893
+  }
 }
